@@ -1,0 +1,186 @@
+Classfile /Users/yuxiao/Projects/personal/geek05/src/main/java/com/yuxiao/geek05/Hello.class
+  Last modified 2021年8月6日; size 1209 bytes
+  MD5 checksum 9b2a3dbfd6efd42c06b4300d97b56841
+  Compiled from "Hello.java"
+public class com.yuxiao.geek05.Hello
+  minor version: 0
+  major version: 56                       // java大版本号：jdk12
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #12                         // com/yuxiao/geek05/Hello
+  super_class: #13                        // java/lang/Object
+  interfaces: 0, fields: 0, methods: 2, attributes: 3
+Constant pool:
+   #1 = Methodref          #13.#23        // java/lang/Object."<init>":()V
+   #2 = Fieldref           #24.#25        // java/lang/System.out:Ljava/io/PrintStream;
+   #3 = InvokeDynamic      #0:#29         // #0:makeConcatWithConstants:(I)Ljava/lang/String;
+   #4 = Methodref          #30.#31        // java/io/PrintStream.println:(Ljava/lang/String;)V
+   #5 = String             #32            // c less than b
+   #6 = Float              1.1f
+   #7 = Double             0.2d
+   #9 = InvokeDynamic      #1:#29         // #1:makeConcatWithConstants:(I)Ljava/lang/String;
+  #10 = InvokeDynamic      #2:#35         // #2:makeConcatWithConstants:(D)Ljava/lang/String;
+  #11 = InvokeDynamic      #3:#37         // #3:makeConcatWithConstants:(F)Ljava/lang/String;
+  #12 = Class              #38            // com/yuxiao/geek05/Hello
+  #13 = Class              #39            // java/lang/Object
+  #14 = Utf8               <init>
+  #15 = Utf8               ()V
+  #16 = Utf8               Code
+  #17 = Utf8               LineNumberTable
+  #18 = Utf8               main
+  #19 = Utf8               ([Ljava/lang/String;)V
+  #20 = Utf8               StackMapTable
+  #21 = Utf8               SourceFile
+  #22 = Utf8               Hello.java
+  #23 = NameAndType        #14:#15        // "<init>":()V
+  #24 = Class              #40            // java/lang/System
+  #25 = NameAndType        #41:#42        // out:Ljava/io/PrintStream;
+  #26 = Utf8               BootstrapMethods
+  #27 = MethodHandle       6:#43          // REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #28 = String             #44            //  b = \u0001
+  #29 = NameAndType        #45:#46        // makeConcatWithConstants:(I)Ljava/lang/String;
+  #30 = Class              #47            // java/io/PrintStream
+  #31 = NameAndType        #48:#49        // println:(Ljava/lang/String;)V
+  #32 = Utf8               c less than b
+  #33 = String             #50            // by + a =\u0001
+  #34 = String             #51            // fl * dou = \u0001
+  #35 = NameAndType        #45:#52        // makeConcatWithConstants:(D)Ljava/lang/String;
+  #36 = String             #53            // by - fl = \u0001
+  #37 = NameAndType        #45:#54        // makeConcatWithConstants:(F)Ljava/lang/String;
+  #38 = Utf8               com/yuxiao/geek05/Hello
+  #39 = Utf8               java/lang/Object
+  #40 = Utf8               java/lang/System
+  #41 = Utf8               out
+  #42 = Utf8               Ljava/io/PrintStream;
+  #43 = Methodref          #55.#56        // java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #44 = Utf8                b = \u0001
+  #45 = Utf8               makeConcatWithConstants
+  #46 = Utf8               (I)Ljava/lang/String;
+  #47 = Utf8               java/io/PrintStream
+  #48 = Utf8               println
+  #49 = Utf8               (Ljava/lang/String;)V
+  #50 = Utf8               by + a =\u0001
+  #51 = Utf8               fl * dou = \u0001
+  #52 = Utf8               (D)Ljava/lang/String;
+  #53 = Utf8               by - fl = \u0001
+  #54 = Utf8               (F)Ljava/lang/String;
+  #55 = Class              #57            // java/lang/invoke/StringConcatFactory
+  #56 = NameAndType        #45:#61        // makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #57 = Utf8               java/lang/invoke/StringConcatFactory
+  #58 = Class              #63            // java/lang/invoke/MethodHandles$Lookup
+  #59 = Utf8               Lookup
+  #60 = Utf8               InnerClasses
+  #61 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+  #62 = Class              #64            // java/lang/invoke/MethodHandles
+  #63 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #64 = Utf8               java/lang/invoke/MethodHandles
+{
+  public com.yuxiao.geek05.Hello();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1          // 初始化方法，栈深度为1，本地变量表为1，参数为1，本地变量和参数为1是因为实例方法的第一个参数其实是this，此处容易忽略
+         0: aload_0                           // 从偏移量0位置的局部变量，将本地变量表中0位置的数据加载到操作栈中
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V,   用于调用需要特殊处理的方法，包括实例初始化方法、私有方法和父类方法
+         4: return
+      LineNumberTable:
+        line 7: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=5, locals=9, args_size=1            // 栈深度为5，局部变量表长度为9，参数个数为1
+         0: iconst_1                            // 将int型的常量1加载到操作数栈
+         1: istore_1                            // 将int型的数值1从操作数栈存储到局部变量表
+         2: iload_1                             // 将一个局部变量加载到操作栈
+         3: iconst_3                            // 将常量3加载到操作数栈
+         4: ishl                                //
+         5: istore_2
+         6: iload_1
+         7: iload_2
+         8: imul
+         9: istore_3
+        10: iload_3
+        11: iload_2
+        12: if_icmpgt     19
+        15: iconst_1
+        16: goto          20
+        19: iconst_0
+        20: istore        4
+        22: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        25: iload_2
+        26: invokedynamic #3,  0              // InvokeDynamic #0:makeConcatWithConstants:(I)Ljava/lang/String;
+        31: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        34: iload         4
+        36: ifeq          47
+        39: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        42: ldc           #5                  // String c less than b
+        44: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        47: iconst_1
+        48: istore        5
+        50: ldc           #6                  // float 1.1f
+        52: fstore        6
+        54: ldc2_w        #7                  // double 0.2d
+        57: dstore        7
+        59: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        62: iload         5
+        64: iload_1
+        65: iadd
+        66: invokedynamic #9,  0              // InvokeDynamic #1:makeConcatWithConstants:(I)Ljava/lang/String;
+        71: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        74: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        77: fload         6
+        79: f2d
+        80: dload         7
+        82: dmul
+        83: invokedynamic #10,  0             // InvokeDynamic #2:makeConcatWithConstants:(D)Ljava/lang/String;
+        88: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        91: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        94: iload         5
+        96: i2f
+        97: fload         6
+        99: fsub
+       100: invokedynamic #11,  0             // InvokeDynamic #3:makeConcatWithConstants:(F)Ljava/lang/String;
+       105: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       108: return
+      LineNumberTable:
+        line 11: 0
+        line 12: 2
+        line 14: 6
+        line 15: 10
+        line 16: 22
+        line 17: 34
+        line 18: 39
+        line 21: 47
+        line 23: 50
+        line 25: 54
+        line 27: 59
+        line 29: 74
+        line 31: 91
+        line 32: 108
+      StackMapTable: number_of_entries = 3
+        frame_type = 254 /* append */
+          offset_delta = 19
+          locals = [ int, int, int ]
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+        frame_type = 252 /* append */
+          offset_delta = 26
+          locals = [ int ]
+}
+SourceFile: "Hello.java"
+InnerClasses:
+  public static final #59= #58 of #62;    // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+BootstrapMethods:
+  0: #27 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #28  b = \u0001
+  1: #27 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #33 by + a =\u0001
+  2: #27 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #34 fl * dou = \u0001
+  3: #27 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #36 by - fl = \u0001
