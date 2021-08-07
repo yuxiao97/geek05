@@ -30,9 +30,9 @@ public class CustomClassLoader extends ClassLoader{
         }
         String filename = name + ".xlass";
         // /开头表示从当前工程的根目录查找，""开始标识从当前目录查找
-        String path = this.getClass().getResource("/").getPath() + filename;
+        // String path = this.getClass().getResource("/").getPath() + filename;
         try {
-            InputStream resourceAsStream = this.getResourceAsStream( filename);
+            InputStream resourceAsStream = this.getResourceAsStream(filename);
             int length = resourceAsStream.available();
             System.out.println("文件长度:" + length);
             byte[] fileBytes = new byte[length];
