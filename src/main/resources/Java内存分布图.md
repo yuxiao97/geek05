@@ -1,5 +1,4 @@
 # Java内存分布图
 
+![image](https://user-images.githubusercontent.com/27430795/128586148-3b0392f5-5dee-47df-a054-ea62e7fb9418.png)
 
-
-![image-20210807110858774](/Users/yuxiao/Library/Application Support/typora-user-images/image-20210807110858774.png)
