@@ -1,4 +1,4 @@
-package com.yuxiao.geek05;
+package com.yuxiao.geek05.week01;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
