@@ -29,13 +29,13 @@ GC收集器使用`-XX:+UseSerialGC`，以启用SerialGC，开启该参数后年�
 
 ### GCEasy分析图
 
-![image-20210813191646077](/Users/yuxiao/Documents/学习笔记/JVMMemorySize-Serial.png)
+![image-20210813191646077](imgs/JVMMemorySize-Serial.png)
 
-![image-20210813191723348](/Users/yuxiao/Documents/学习笔记/GCPauseTime-Serial.png)
+![image-20210813191723348](imgs/GCPauseTime-Serial.png)
 
-![image-20210813191845793](/Users/yuxiao/Documents/学习笔记/HeapBeforeGC-Serial.png)
+![image-20210813191845793](imgs/HeapBeforeGC-Serial.png)
 
-![image-20210813192032472](/Users/yuxiao/Documents/学习笔记/GCStatistics-Serial.png)
+![image-20210813192032472](imgs/GCStatistics-Serial.png)
 
 ### Serial小结
 
@@ -51,13 +51,13 @@ GC收集器使用-XX:+UseParNewGC，以启用ParNew并行收集器，ParNew是Se
 
 #### GCEasy分析图
 
-![image-20210813213118063](/Users/yuxiao/Documents/学习笔记/JVMMemorySize-parnew.png)
+![image-20210813213118063](imgs/JVMMemorySize-parnew.png)
 
-![image-20210813213159496](/Users/yuxiao/Documents/学习笔记/GCDurationTime分布图-parnew.png)
+![image-20210813213159496](imgs/GCDurationTime分布图-parnew.png)
 
-![image-20210813213245576](/Users/yuxiao/Documents/学习笔记/HeapBeforeGC-parnew.png)
+![image-20210813213245576](imgs/HeapBeforeGC-parnew.png)
 
-![image-20210813213318081](/Users/yuxiao/Documents/学习笔记/GCStatistics-parnew.png)
+![image-20210813213318081](imgs/GCStatistics-parnew.png)
 
 #### ParNew小结
 
@@ -72,11 +72,11 @@ Parallel收集器提供了自适应的调节策略`-XX:+UseAdaptiveSizePolicy`�
 
 #### GCEasy分析图
 
-![image-20210813214808366](/Users/yuxiao/Documents/学习笔记/JVMMemorySize-parallel.png)
+![image-20210813214808366](imgs/JVMMemorySize-parallel.png)
 
-![image-20210813214841713](/Users/yuxiao/Documents/学习笔记/GCPauseTimeIndicators.png)
+![image-20210813214841713](imgs/GCPauseTimeIndicators.png)
 
-![image-20210813215125979](/Users/yuxiao/Documents/学习笔记/GCTimeStatistics-parallel.png)
+![image-20210813215125979](imgs/GCTimeStatistics-parallel.png)
 
 #### Parallel小结
 
@@ -93,11 +93,11 @@ GC收集器使用`-XX:+UserConcMarkSweepGC`
 
 ### GCEasy分析图
 
-![image-20210813224513453](/Users/yuxiao/Documents/学习笔记/JVMMemorySize-CMS.png)
+![image-20210813224513453](imgs/JVMMemorySize-CMS.png)
 
-![image-20210813225332993](/Users/yuxiao/Documents/学习笔记/GCDurationTimeIndicators-CMS.png)
+![image-20210813225332993](imgs/GCDurationTimeIndicators-CMS.png)
 
-![image-20210813225535712](/Users/yuxiao/Documents/学习笔记/GCTimeStatistics-CMS.png)
+![image-20210813225535712](imgs/GCTimeStatistics-CMS.png)
 
 ### CMS小结
 
@@ -111,15 +111,15 @@ GC收集器使用`-XX:+UserConcMarkSweepGC`
 
 ### GCEasy分析图
 
-![image-20210813231737947](/Users/yuxiao/Documents/学习笔记/JVMMemorySize-G1.png)
+![image-20210813231737947](imgs/JVMMemorySize-G1.png)
 
-![image-20210813231808328](/Users/yuxiao/Documents/学习笔记/GCTimeIndicators-G1.png)
+![image-20210813231808328](imgs/GCTimeIndicators-G1.png)
 
-![image-20210813231907765](/Users/yuxiao/Documents/学习笔记/PauseGCDuration-G1.png)
+![image-20210813231907765](imgs/PauseGCDuration-G1.png)
 
-![image-20210813231945075](/Users/yuxiao/Documents/学习笔记/GCTimeStatistics-G1.png)
+![image-20210813231945075](imgs/GCTimeStatistics-G1.png)
 
-![image-20210813232034772](/Users/yuxiao/Documents/学习笔记/GCCausesTime-G1.png)
+![image-20210813232034772](imgs/GCCausesTime-G1.png)
 
 ### G1小结
 
