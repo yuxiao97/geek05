@@ -1,7 +1,5 @@
 package com.yuxiao.geek05.week01;
 
-import com.yuxiao.geek05.week01.CustomClassLoader;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,7 +13,7 @@ import java.lang.reflect.Method;
 public class ClassLoaderLoadXarTest {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        CustomClassLoader classLoader = new CustomClassLoader();
+        CustomClassLoader classLoader = CustomClassLoader.getInstance();
         classLoader.loadExtXar("lib");
         Object targetInstance = classLoader.loadClass("Hello").newInstance();
         Method helloMethod = targetInstance.getClass().getMethod("hello");

@@ -19,6 +19,19 @@ import java.util.jar.JarFile;
 public class CustomClassLoader extends ClassLoader {
 
     /**
+     * 禁止外部实例化
+     */
+    private CustomClassLoader(){}
+
+    private static final CustomClassLoader classLoader  = new CustomClassLoader();
+
+
+    public static CustomClassLoader getInstance() {
+        return classLoader;
+    }
+
+
+    /**
      * 加载xlass打包的xar文件
      *
      * @param extLibPath 扩展lib包加载路径
@@ -49,6 +62,9 @@ public class CustomClassLoader extends ClassLoader {
             }
         }
     }
+
+
+
 
 
     @Override
