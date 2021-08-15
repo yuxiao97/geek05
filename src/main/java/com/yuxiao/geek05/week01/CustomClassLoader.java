@@ -1,11 +1,6 @@
 package com.yuxiao.geek05.week01;
 
-import sun.misc.IOUtils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -17,6 +12,8 @@ import java.util.jar.JarFile;
  * @date 2021-08-06 22:21
  */
 public class CustomClassLoader extends ClassLoader {
+
+
 
     /**
      * 禁止外部实例化
@@ -45,19 +42,21 @@ public class CustomClassLoader extends ClassLoader {
                 Enumeration<JarEntry> entries = jarFile.entries();
                 while (entries.hasMoreElements()) {
                     JarEntry jarEntry = entries.nextElement();
-                    byte[] bytes = IOUtils.readFully(jarFile.getInputStream(jarEntry), (int) jarEntry.getSize(), true);
+                    byte[] bytes = getBytes(jarFile.getInputStream(jarEntry));
+                    String name = jarEntry.getName();
                     // 解码xar中的xlass文件
-                    if (jarFile.getName().endsWith("xar")) {
+                    if (jarFile.getName().endsWith("xar") && name.endsWith(".xlass")) {
                         bytes = getDecodeBytes(bytes);
                     }
-                    String name = jarEntry.getName();
-                    name = name.substring(0, name.lastIndexOf("."));
-                    Class<?> loadedClass = findLoadedClass(name);
-                    if (loadedClass != null) {
-                        System.out.println(name + "已经加载过，无需重复加载");
-                        return;
+                    if (!"module-info.class".equals(name) && (name.endsWith(".class") || name.endsWith(".xlass"))) {
+                        name = name.substring(0, name.lastIndexOf("."));
+                        Class<?> loadedClass = findLoadedClass(name);
+                        if (loadedClass != null) {
+                            System.out.println(name + "已经加载过，无需重复加载");
+                            return;
+                        }
+                        super.defineClass(name, bytes, 0, bytes.length);
                     }
-                    super.defineClass(name, bytes, 0, bytes.length);
                 }
             }
         }
@@ -98,6 +97,25 @@ public class CustomClassLoader extends ClassLoader {
         classLoader = null;
         System.out.println("CustomClassLoader unload...");
     }
+
+
+    /**
+     * 读取输入流中的数据，返回字节数组
+     *
+     * @param inputStream 输入流
+     * @return
+     * @throws IOException
+     */
+    private byte[] getBytes(InputStream inputStream) throws IOException {
+        byte[] buffer = new byte[256];
+        int readLen = 0;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        while ((readLen = inputStream.read(buffer)) != -1) {
+            baos.write(buffer, 0, readLen);
+        }
+        return baos.toByteArray();
+    }
+
 
     /**
      * 处理字节码数据
