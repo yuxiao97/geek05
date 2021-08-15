@@ -23,7 +23,7 @@ public class CustomClassLoader extends ClassLoader {
      */
     private CustomClassLoader(){}
 
-    private static final CustomClassLoader classLoader  = new CustomClassLoader();
+    private static CustomClassLoader classLoader  = new CustomClassLoader();
 
 
     public static CustomClassLoader getInstance() {
@@ -64,13 +64,10 @@ public class CustomClassLoader extends ClassLoader {
     }
 
 
-
-
-
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException {
         // 检查是否已加载过，加载过则直接返回
-        Class<?> loadedClass = findLoadedClass(name);
+        Class<?> loadedClass = super.findLoadedClass(name);
         if (loadedClass != null) {
             return loadedClass;
         }
@@ -95,6 +92,12 @@ public class CustomClassLoader extends ClassLoader {
         throw new RuntimeException("文件加载出错");
     }
 
+
+    @Override
+    protected void finalize() throws Throwable {
+        classLoader = null;
+        System.out.println("CustomClassLoader unload...");
+    }
 
     /**
      * 处理字节码数据
