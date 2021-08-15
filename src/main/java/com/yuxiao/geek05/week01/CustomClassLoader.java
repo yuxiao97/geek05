@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -20,22 +18,12 @@ import java.util.jar.JarFile;
  */
 public class CustomClassLoader extends ClassLoader {
 
-
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, IOException {
-        CustomClassLoader classLoader = new CustomClassLoader();
-        classLoader.loadExtXar("lib");
-        Object targetInstance = classLoader.findClass("Hello").newInstance();
-        Method helloMethod = targetInstance.getClass().getMethod("hello");
-        helloMethod.invoke(targetInstance);
-    }
-
-
     /**
      * 加载xlass打包的xar文件
      *
      * @param extLibPath 扩展lib包加载路径
      */
-    private void loadExtXar(String extLibPath) throws IOException {
+    public void loadExtXar(String extLibPath) throws IOException {
         File extLibFileDir = new File(extLibPath);
         if (extLibFileDir.isDirectory()) {
             File[] files = extLibFileDir.listFiles();
@@ -64,7 +52,7 @@ public class CustomClassLoader extends ClassLoader {
 
 
     @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
+    public Class<?> findClass(String name) throws ClassNotFoundException {
         // 检查是否已加载过，加载过则直接返回
         Class<?> loadedClass = findLoadedClass(name);
         if (loadedClass != null) {
