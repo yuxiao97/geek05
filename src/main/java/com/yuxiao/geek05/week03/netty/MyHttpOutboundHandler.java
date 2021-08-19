@@ -10,6 +10,9 @@ import io.netty.handler.codec.http.HttpVersion;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Response;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Http出站处理器
  *
@@ -26,9 +29,14 @@ public class MyHttpOutboundHandler extends ChannelOutboundHandlerAdapter {
         byte[] bizBody = response.body().bytes();
         DefaultFullHttpResponse httpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1,
                 HttpResponseStatus.OK, Unpooled.wrappedBuffer(bizBody));
+        Map<String, List<String>> stringListMap = response.headers().toMultimap();
         httpResponse.headers()
                 .set("Content-Type", "application/json; charset=utf-8")
                 .set("Content-Length", bizBody.length);
+        Map<String, List<String>> headers = response.headers().toMultimap();
+        headers.entrySet().forEach(entry -> {
+            httpResponse.headers().set(entry.getKey(), entry.getValue());
+        });
         ctx.writeAndFlush(httpResponse);
     }
 }

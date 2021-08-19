@@ -1,9 +1,12 @@
 package com.yuxiao.geek05.week03.netty;
 
+import com.yuxiao.geek05.week03.netty.filter.MyHttpRequestHeaderFilter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpServerCodec;
+
+import java.util.Collections;
 
 /**
  * @author yangjunwei
@@ -24,7 +27,7 @@ public class MyHttpChannelInitializer extends ChannelInitializer<SocketChannel> 
          * 反过来，入站时扫描到了OutboundHandle，但不是InboundHandler所以不执行，但此时游标经过了OutboundHandler，此时，出站的时候就可以执行到OutboundHandler了
          */
         pipeline.addLast(new MyHttpOutboundHandler());
-        pipeline.addLast(new MyHttpInboundHandler());
+        pipeline.addLast(new MyHttpInboundHandler(Collections.singletonList(new MyHttpRequestHeaderFilter())));
         // fixme : 此处需要一个处理全局handler异常的handler
         pipeline.addLast(new MyHttpHandlerExceptionHandler());
     }

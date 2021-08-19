@@ -1,12 +1,15 @@
 package com.yuxiao.geek05.week03.netty;
 
 import com.yuxiao.geek05.week02.OKHttpClient;
+import com.yuxiao.geek05.week03.netty.adapter.MyHttpInboundHandlerAdapter;
+import com.yuxiao.geek05.week03.netty.filter.MyHttpRequestFilter;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.DefaultHttpRequest;
 import io.netty.handler.codec.http.HttpRequest;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.Headers;
 import okhttp3.Response;
 
 import java.util.List;
@@ -18,7 +21,13 @@ import java.util.List;
  * @date 2021-08-19 21:49
  */
 @Slf4j
-public class MyHttpInboundHandler extends ChannelInboundHandlerAdapter {
+public class MyHttpInboundHandler extends MyHttpInboundHandlerAdapter {
+
+
+    public MyHttpInboundHandler(List<MyHttpRequestFilter> requestFilters) {
+        super(requestFilters);
+    }
+
 
     /**
      * 向服务端请求的客户端
@@ -40,15 +49,12 @@ public class MyHttpInboundHandler extends ChannelInboundHandlerAdapter {
      * @throws Exception
      */
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void handlerRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof HttpRequest) {
             DefaultHttpRequest httpRequest = (DefaultHttpRequest) msg;
             String uri = httpRequest.uri();
-            log.info("收到请求：{}", uri);
-            if ("/favicon.ico".equals(uri)) {
-                log.warn("Ignore request /favicon.ico");
-                return;
-            }
+            String filterMagic = httpRequest.headers().get("magic");
+            log.info("Header Magic:{}", filterMagic);
             // 处理转发逻辑，获取后端可用的服务
             List<ServerAddress> availableServer = urlListenServer.getAvailableServer(uri);
             if (availableServer.isEmpty()) {
@@ -59,6 +65,7 @@ public class MyHttpInboundHandler extends ChannelInboundHandlerAdapter {
             StringBuilder url = new StringBuilder("http://").append(serverAddress.getHost())
                     .append(":").append(serverAddress.getPort()).append("/");
             Response response = okHttpClient.get(url.toString());
+            response.headers().newBuilder().set("magic", filterMagic).build();
             ctx.write(response);
         }
     }
