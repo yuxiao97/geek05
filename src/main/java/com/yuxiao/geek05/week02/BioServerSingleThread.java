@@ -1,6 +1,8 @@
 package com.yuxiao.geek05.week02;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,6 +12,7 @@ import java.net.Socket;
  * @author yangjunwei
  * @date 2021-08-10 14:17
  */
+@Slf4j
 public class BioServerSingleThread {
 
     private static final int PORT = 8801;
@@ -19,7 +22,7 @@ public class BioServerSingleThread {
     public static void main(String[] args) throws IOException {
         // 创建一个ServerSocket，绑定端口port，设置运行等待连接的队列大小(默认50)，超出队列大小后，其他的则拒绝服务
         ServerSocket serverSocket = new ServerSocket(PORT, BACKLOG);
-        System.out.println("服务已启动，等待客户端连接...");
+        log.info("服务已启动，等待客户端连接...");
         while (true) {
             try {
                 service(serverSocket.accept());
@@ -46,7 +49,7 @@ public class BioServerSingleThread {
         // 输出空行，区分报文头和报文体
         printStream.println();
         printStream.println(msgBody);
-        System.out.println("给客户端返回数据："+ msgBody);
+        log.info("给客户端返回数据：{}", msgBody);
         printStream.close();
         socket.close();
     }

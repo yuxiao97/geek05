@@ -13,14 +13,26 @@ import java.io.IOException;
  */
 public class OKHttpClient {
 
+    private static OkHttpClient httpClient = new OkHttpClient.Builder().build();
 
-    private static OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    /**
+     * 要转发的url
+     */
+    private static final String PROXY_URL = "http://localhost:8801";
 
-    private static final String URL = "http://localhost:8801";
+    public Response get(String url) throws IOException {
+        Request request = new Request.Builder().url(url).build();
+        return httpClient.newCall(request).execute();
+    }
+
+
+    public Response post(String url, Object body) {
+        return null;
+    }
+
 
     public static void main(String[] args) throws IOException {
-        OkHttpClient httpClient = builder.build();
-        Request request = new Request.Builder().url(URL).build();
+        Request request = new Request.Builder().url(PROXY_URL).build();
         Response response = httpClient.newCall(request).execute();
         if (response.isSuccessful()) {
             System.out.println(response.body().byteString().utf8());
