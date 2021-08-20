@@ -1,6 +1,7 @@
 package com.yuxiao.geek05.week03.netty;
 
-import lombok.EqualsAndHashCode;
+import com.yuxiao.geek05.week03.netty.router.MyRandomServerRouter;
+import com.yuxiao.geek05.week03.netty.router.ServerRouter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -64,7 +65,24 @@ public class UrlListenServer {
      */
     public List<ServerAddress> getAvailableServer(String url) {
         // 延迟删除不可用服务器
-        return removeUnavailableServer( urlServerMapping.get(url));
+        return removeUnavailableServer(urlServerMapping.get(url));
+    }
+
+
+    /**
+     * 按指定路由策略获取一个可用的后端服务地址
+     *
+     * @param url          请求地址
+     * @param serverRouter 路由策略
+     * @return
+     */
+    public ServerAddress getAvailableServer(String url, ServerRouter serverRouter) {
+        List<ServerAddress> serverAddresses = removeUnavailableServer(urlServerMapping.get(url));
+        if (serverRouter != null) {
+            return serverRouter.pickOne(serverAddresses, null);
+        }
+        // 默认使用随机策略
+        return new MyRandomServerRouter().pickOne(serverAddresses, null);
     }
 
 
@@ -88,50 +106,4 @@ public class UrlListenServer {
     }
 }
 
-@EqualsAndHashCode
-class ServerAddress {
 
-    private String host;
-
-    private int port;
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof ServerAddress) {
-            ServerAddress other = (ServerAddress) obj;
-            if (this.host.equals(other.getHost()) && this.port == other.getPort()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "host='" + host + '\'' +
-                ", port=" + port +
-                '}';
-    }
-}
