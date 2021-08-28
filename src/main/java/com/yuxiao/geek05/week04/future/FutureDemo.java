@@ -38,8 +38,31 @@ public class FutureDemo {
         }, ThreadPoolUtil.getThreadPoolExecutor()).join();
         System.out.println(futureResult);
 
+        // 6：通过回调获取异步执行的结果
+        futureResult = futureDemo.getExecuteResultFromMyRunnable();
+        System.out.println(futureResult);
+
 
         ThreadPoolUtil.getThreadPoolExecutor().shutdown();
+    }
+
+
+    /**
+     * 通过自定义的Runnable封装自定义的FutureResult返回异步执行的结果
+     * <p>
+     * 支持get超时和无限期等待两种形式的结果返回
+     *
+     * @param <T>
+     * @return
+     */
+    private <T> T getExecuteResultFromMyRunnable() {
+        MyFutureResult<String> myFutureResult = new FutureDemo.MyFutureResult<>();
+        MyRunnable runnable = new MyRunnable<>(myFutureResult);
+        new Thread(runnable).start();
+        // 通过等待超时的方式获取异步执行的结果
+        // myFutureResult.get(10000);
+        // 无限期等待异步执行的结果，任务不结束，此处不返回
+        return myFutureResult.get();
     }
 
 
@@ -108,6 +131,66 @@ public class FutureDemo {
         public T call() throws Exception {
             return (T) sayHello("MyCallable");
         }
+    }
+
+
+    class MyRunnable<T> implements Runnable {
+
+        private MyFutureResult<T> futureResult;
+
+        public MyRunnable(MyFutureResult futureResult) {
+            this.futureResult = futureResult;
+        }
+
+        @Override
+        public void run() {
+            // 模拟任务执行时长（超过超时等待时间），然调用线程获取结果超时后自动退出
+            /*try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+            futureResult.set((T) sayHello("MyRunnalble and MyFutureResult"));
+        }
+    }
+
+
+    /**
+     * 自定义异步结果回调获取
+     *
+     * @param <T>
+     */
+    class MyFutureResult<T> {
+
+        T result = null;
+
+        public void set(T result) {
+            this.result = result;
+            // 唤醒等待结果的线程
+            synchronized (this) {
+                this.notify();
+            }
+        }
+
+        public <T> T get() {
+            return get(0);
+        }
+
+        public <T> T get(long timeout) {
+            if (result != null) {
+                return (T) result;
+            }
+            try {
+                // 等待被唤醒，调用方设置好结果后通过notify唤醒
+                synchronized (this) {
+                    this.wait(timeout);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return (T) result;
+        }
+
     }
 
 }
