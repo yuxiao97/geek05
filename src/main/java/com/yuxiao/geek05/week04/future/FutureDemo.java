@@ -42,6 +42,13 @@ public class FutureDemo {
         futureResult = futureDemo.getExecuteResultFromMyRunnable();
         System.out.println(futureResult);
 
+        // 7：通过ForkJoinPool提交任务返回异步执行的结果
+        ForkJoinTask<String> forkJoinTask = ForkJoinPool.commonPool().submit(() -> {
+            return futureDemo.sayHello("ForkJoinPool#submit");
+        });
+        futureResult = forkJoinTask.get();
+        System.out.println(futureResult);
+
 
         ThreadPoolUtil.getThreadPoolExecutor().shutdown();
     }
