@@ -1,6 +1,7 @@
 package com.yuxiao.geek05.week05.pojo;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 public class SchoolClass {
 
+    @Autowired
     private List<Student> students;
 
 }
