@@ -19,7 +19,6 @@ public class AtomicDemo {
 
 
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool()
         AtomicDemo atomicTest = new AtomicDemo();
         int count = 100;
         atomicTest.testAtomicInteger(count);
