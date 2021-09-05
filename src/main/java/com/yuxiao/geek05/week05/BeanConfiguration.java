@@ -19,7 +19,7 @@ public class BeanConfiguration {
     public Student student1(){
         Student student = new Student();
         student.setStudentId("C202101");
-        student.setName("C202101");
+        student.setName("狂徒三");
         return student;
     }
 
@@ -27,7 +27,7 @@ public class BeanConfiguration {
     public Student student2(){
         Student student = new Student();
         student.setStudentId("C202102");
-        student.setName("C202102");
+        student.setName("李四");
         return student;
     }
 

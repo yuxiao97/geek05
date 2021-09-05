@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.yuxiao.geek05.week05.boot.MyAutoConfiguration
+  com.yuxiao.geek05.week05.boot.MyAutoConfiguration,\
+  com.yuxiao.geek05.week05.db.MyDataSourceAutoConfiguration
