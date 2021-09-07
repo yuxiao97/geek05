@@ -2,11 +2,12 @@ package com.yuxiao.geek05.week05.db;
 
 import com.yuxiao.geek05.week05.db.annotation.MyTransactional;
 import com.yuxiao.geek05.week05.pojo.Student;
-import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 /**
  * @author yangjunwei
@@ -16,19 +17,13 @@ import java.sql.*;
 public class TransactionCrud {
 
     @Autowired
-    private TransactionConfig transactionConfig;
+    private MyJdbcTemplate myJdbcTemplate;
 
-    @Autowired
-    private HikariDataSource hikariDataSource;
 
     @MyTransactional(rollback = {Exception.class})
     public int insertStudent(Student student) throws SQLException {
-        Connection connection = transactionConfig.getConnectionThreadLocal().get();
         String sql = "insert into student(`student_id`, `name`) value(?, ?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, student.getStudentId());
-        preparedStatement.setString(2, student.getName());
-        preparedStatement.execute();
+        myJdbcTemplate.execute(sql, student.getStudentId(), student.getName());
         // 测试通过自定义MyTransactional和AOP进行事务管理
         int i = 1 / 0;
         return 1;
@@ -37,11 +32,8 @@ public class TransactionCrud {
 
 
     public Student getByStudentId(String studentId) throws SQLException {
-        Connection connection = hikariDataSource.getConnection();
         String sql = "select * from student where student_id = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, studentId);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = myJdbcTemplate.executeQuery(sql, studentId);
         Student student = null;
         if(resultSet.next()) {
             ResultSetMetaData metaData = resultSet.getMetaData();

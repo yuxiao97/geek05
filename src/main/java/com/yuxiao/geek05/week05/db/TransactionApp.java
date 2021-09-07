@@ -18,9 +18,10 @@ public class TransactionApp {
 
     public static void main(String[] args) throws SQLException {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(TransactionApp.class, args);
+        applicationContext.registerShutdownHook();
         TransactionCrud transactionCrud = applicationContext.getBean(TransactionCrud.class);
-        /*Student student2 = (Student) applicationContext.getBean("student1");
-        transactionCrud.insertStudent(student2);*/
+        Student student2 = (Student) applicationContext.getBean("student1");
+        transactionCrud.insertStudent(student2);
         log.info("{}", transactionCrud.getByStudentId("C202102"));
     }
 
